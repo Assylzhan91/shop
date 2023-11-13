@@ -8,9 +8,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "changeDetection": "OnPush",
-          "skipTests": true,
-          "inlineTemplate": true,
-          "style": "none"
+          "skipTests": true
         },
         "@schematics/angular:service": {
           "skipTests": true
@@ -35,7 +33,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },

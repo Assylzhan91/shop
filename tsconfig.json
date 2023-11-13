@@ -3,9 +3,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
+      "@core*": ["core*"],
       "@tokens": ["./src/app/tokens/tokens.ts"],
       "@services/*": ["./src/app/services/*"],
-      "@models/*": ["./src/app/models/*"],
+      "@models": ["./src/app/models/index.ts"],
+      "@shared": ["./src/app/shared/index.ts"],
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
