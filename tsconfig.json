@@ -8,6 +8,7 @@
       "@services/*": ["./src/app/services/*"],
       "@models": ["./src/app/models/index.ts"],
       "@shared": ["./src/app/shared/index.ts"],
+      "@shared-admin": ["./src/app/admin/shared/index.ts"],
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

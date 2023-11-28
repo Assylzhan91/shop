@@ -7,18 +7,20 @@ import { MainLayoutComponent } from '@shared';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
+import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    ProductPageComponent,
     MainLayoutComponent,
     MainPageComponent,
-    ProductPageComponent,
-    CartPageComponent
+    CartPageComponent,
+    AppComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
