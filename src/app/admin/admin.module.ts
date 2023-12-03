@@ -8,6 +8,7 @@ import {AddPageComponent} from "./add-page/add-page.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {
@@ -34,8 +35,10 @@ const routes: Routes = [
     AddPageComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
     CommonModule,
-    RouterModule.forChild(routes)
+    FormsModule,
   ]
 })
 export class AdminModule { }
