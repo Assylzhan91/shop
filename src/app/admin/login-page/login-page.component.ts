@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 import {UserInterface} from "@models";
-import {Router} from "@angular/router";
-import {AuthService} from "@shared";
+import {AUTH_SERVICE} from "@tokens";
 
 interface ILoginForm {
   email: FormControl<string | null>;
@@ -19,7 +19,7 @@ interface ILoginForm {
 export class LoginPageComponent implements OnInit {
   form!: FormGroup<ILoginForm>
   submitted: boolean = false
-  authService = inject(AuthService)
+  authService = inject(AUTH_SERVICE)
   router = inject(Router)
 
   ngOnInit(): void {
