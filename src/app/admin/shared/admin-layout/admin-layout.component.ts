@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {AuthService} from "@shared";
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,5 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminLayoutComponent {
+  authService = inject(AuthService)
 
+  logout($event: MouseEvent) {
+    $event.preventDefault()
+    this.authService.logout()
+  }
 }

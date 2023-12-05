@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core'
 import {FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 
 import {UserInterface} from "@models";
-import {AuthService} from "../../shared/auth.service";
 import {Router} from "@angular/router";
+import {AuthService} from "@shared";
 
 interface ILoginForm {
   email: FormControl<string | null>;
@@ -16,8 +16,8 @@ interface ILoginForm {
   styleUrls: ['./login-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginPageComponent implements OnInit{
-  form!:FormGroup<ILoginForm>
+export class LoginPageComponent implements OnInit {
+  form!: FormGroup<ILoginForm>
   submitted: boolean = false
   authService = inject(AuthService)
   router = inject(Router)
@@ -39,27 +39,24 @@ export class LoginPageComponent implements OnInit{
     }
 
     this.submitted = true
-    if( this.form.value.email && this.form.value.password) {
+    if (this.form.value.email && this.form.value.password) {
       const user: UserInterface = {
         email: this.form.value.email,
         password: this.form.value.password,
+        returnSecureToken: true
       }
 
       this.authService
         .login(user)
-        .then(({user})=> {
+        .subscribe(() => {
           this.form.reset()
           this.router.navigate(['/admin', 'dashboard'])
           this.submitted = false
-      }).catch((err)=> {
-        console.log(err)
-      })
+        })
     }
-
-
   }
 
-  get getForm () {
+  get getForm() {
     return this.form.controls
   }
 }
