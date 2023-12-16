@@ -6,12 +6,12 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
-import { MainLayoutComponent, AuthService } from '@shared';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import {AdminModule} from "./admin/admin.module";
 import {environment} from "../environments/environments";
+import { MainLayoutComponent, AuthService } from '@shared';
 import {AUTH_SERVICE} from "@tokens";
 
 @NgModule({

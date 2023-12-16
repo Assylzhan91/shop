@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
 
-import {AuthResponseInterface, UserInterface} from "@models";
 import {environment} from "../../../environments/environments";
+import {AuthResponseInterface, UserInterface} from "@models";
 
 const  localStorageDate  = {
   FbTokenExp: 'fb-token',

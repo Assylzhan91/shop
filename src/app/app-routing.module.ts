@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
-import {MainLayoutComponent} from "@shared";
 import {MainPageComponent} from "./main-page/main-page.component";
 import {ProductPageComponent} from "./product-page/product-page.component";
 import {CartPageComponent} from "./cart-page/cart-page.component";
+import {MainLayoutComponent} from "@shared";
 
 const routes: Routes = [
   {
