@@ -8,7 +8,8 @@
       "schematics": {
         "@schematics/angular:component": {
           "changeDetection": "OnPush",
-          "skipTests": true
+          "skipTests": true,
+          "prefix": "shop"
         },
         "@schematics/angular:service": {
           "skipTests": true
@@ -16,7 +17,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "shop",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -33,9 +34,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["quill"]
           },
           "configurations": {
             "production": {
