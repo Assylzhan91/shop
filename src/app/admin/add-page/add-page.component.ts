@@ -1,7 +1,14 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators
+} from "@angular/forms";
 
-import {AddProductInterface} from "@models";
+import {AddProductInterface, AddProductFormInterface} from "@models";
+import {PRODUCT_SERVICE} from "@tokens";
 
 @Component({
   selector: 'app-add-page',
@@ -10,15 +17,17 @@ import {AddProductInterface} from "@models";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddPageComponent implements OnInit{
-  addProductForm!: FormGroup<AddProductInterface>
+  productService = inject(PRODUCT_SERVICE)
+  addProductForm!: FormGroup<AddProductInterface<FormControl<string>>>
+  isSubmitted: boolean = false
 
   ngOnInit(): void {
-    this.addProductForm = new FormGroup<AddProductInterface>({
-      type: new FormControl(null, [Validators.required]),
-      title: new FormControl(null, [Validators.required]),
-      photo: new FormControl(null, [Validators.required]),
-      info: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required]),
+    this.addProductForm = new UntypedFormGroup({
+      type: new UntypedFormControl('Phone', [Validators.required]),
+      title: new UntypedFormControl('asda', [Validators.required]),
+      photo: new UntypedFormControl('asda', [Validators.required]),
+      info: new UntypedFormControl('asdas', [Validators.required]),
+      price: new UntypedFormControl('asdasd', [Validators.required]),
     })
   }
 
@@ -26,14 +35,16 @@ export class AddPageComponent implements OnInit{
     if(this.addProductForm.invalid) {
       return;
     }
-    const product = {
-      type: this.addProductForm.value,
-      title: this.addProductForm.value,
-      photo: this.addProductForm.value,
-      info: this.addProductForm.value,
-      price: this.addProductForm.value,
+    this.isSubmitted = true
+    const product: AddProductFormInterface = {
+      type: this.addProductForm.value.type,
+      title: this.addProductForm.value.title,
+      photo: this.addProductForm.value.photo,
+      info: this.addProductForm.value.info,
+      price: this.addProductForm.value.price,
+      dataAdd: new Date()
     }
-    console.log(this.addProductForm.controls)
+    this.productService.create(product).subscribe(console.log)
   }
 
   get getAddProductForm() {

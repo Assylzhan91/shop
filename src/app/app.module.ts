@@ -11,8 +11,8 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import {AdminModule} from "./admin/admin.module";
 import {environment} from "../environments/environments";
-import { MainLayoutComponent, AuthService } from '@shared';
-import {AUTH_SERVICE} from "@tokens";
+import {MainLayoutComponent, AuthService, ProductService } from '@shared';
+import {AUTH_SERVICE, PRODUCT_SERVICE} from "@tokens";
 
 @NgModule({
   declarations: [
@@ -33,8 +33,12 @@ import {AUTH_SERVICE} from "@tokens";
   providers: [
     {
       provide: AUTH_SERVICE,
-      useClass: AuthService
-    }
+      useClass: AuthService,
+    },
+    {
+      provide: PRODUCT_SERVICE,
+      useClass: ProductService,
+    },
   ],
   bootstrap: [AppComponent]
 })

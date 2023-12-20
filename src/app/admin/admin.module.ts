@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {QuillEditorComponent} from "ngx-quill";
 
 import {AdminLayoutComponent} from "@shared-admin";
 import {LoginPageComponent} from "./login-page/login-page.component";
@@ -10,7 +11,6 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import {authGuard} from "../shared/guards/auth.guard";
-import {QuillEditorComponent} from "ngx-quill";
 
 const routes: Routes = [
   {
