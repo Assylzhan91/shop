@@ -1,10 +1,9 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Observable, tap} from "rxjs";
 
 import {AuthResponseInterface, UserInterface} from "@models";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environments";
-import {Observable, tap} from "rxjs";
-import {Router} from "@angular/router";
+import {CommonService} from "@shared";
+import {dev} from "@environments";
 
 const  localStorageDate  = {
   FbTokenExp: 'fb-token',
@@ -14,13 +13,15 @@ const  localStorageDate  = {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private http = inject(HttpClient)
-  private router = inject(Router)
-  constructor() { }
+export class AuthService extends  CommonService{
+  private env = dev
+
+  constructor() {
+    super()
+  }
 
   login(user: UserInterface): Observable<AuthResponseInterface> {
-    const { firebase } =  environment;
+    const { firebase } =  this.env.environment;
     return this.http
       .post<AuthResponseInterface>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebase.apiKey}`, user)
       .pipe(
@@ -48,7 +49,7 @@ export class AuthService {
     return localStorage.getItem(localStorageDate.FbToken)
   }
 
-  logout() {
+  logout(): void {
     this.setToken(null)
     this.router.navigate(['/admin', 'login'])
   }

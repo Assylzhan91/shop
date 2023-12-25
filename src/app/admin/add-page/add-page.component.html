@@ -1,1 +1,54 @@
-<p>add-page works!</p>
+<form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
+  <h2>Add product</h2>
+  <div class="form-control">
+    <label for="type-product">Type:</label>
+    <select formControlName="type" id="type-product">
+      <option value="Phone">Phone</option>
+      <option value="Tablet">Tablet</option>
+      <option value="Laptop">Laptop</option>
+    </select>
+
+    <div *ngIf="getAddProductForm.type.touched && getAddProductForm.type.invalid" class="validation">
+      <small *ngIf="getAddProductForm.type?.errors?.['required']">Choose product type</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="name">Name:
+      <input type="text" id="name" formControlName="title">
+    </label>
+
+    <div *ngIf="getAddProductForm.title.touched && getAddProductForm.title.invalid" class="validation">
+      <small *ngIf="getAddProductForm.title?.errors?.['required']">Enter title product</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label>Photo:
+      <quill-editor formControlName="photo"></quill-editor>
+    </label>
+  </div>
+
+  <div class="form-control">
+    <label>Information:
+      <quill-editor formControlName="info" id="information"></quill-editor>
+    </label>
+  </div>
+
+  <div class="form-control">
+    <label for="price">Price:
+      <input type="text" id="price" formControlName="price">
+    </label>
+
+    <div *ngIf="getAddProductForm.price.touched && getAddProductForm.price.invalid" class="validation">
+      <small *ngIf="getAddProductForm.price.errors?.['required']">Choose product type:</small>
+    </div>
+  </div>
+  <button
+    class="btn btn-primary btn-block"
+    type="submit"
+    [disabled]="isSubmitted || addProductForm.invalid"
+  >
+    Add product
+  </button>
+</form>
