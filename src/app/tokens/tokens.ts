@@ -1,4 +1,6 @@
-import {UserService} from "@services/user.service";
 import {InjectionToken} from "@angular/core";
 
-export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
+import {AuthService, ProductService} from "@shared";
+
+export const AUTH_SERVICE = new InjectionToken<AuthService>('AUTH_SERVICE')
+export const PRODUCT_SERVICE = new InjectionToken<ProductService>('PRODUCT_SERVICE')

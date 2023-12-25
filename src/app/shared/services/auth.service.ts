@@ -1,10 +1,9 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Observable, tap} from "rxjs";
 
 import {AuthResponseInterface, UserInterface} from "@models";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environments";
-import {Observable, tap} from "rxjs";
-import {Router} from "@angular/router";
+import {CommonService} from "@shared";
+import {dev} from "@environments";
 
 const  localStorageDate  = {
   FbTokenExp: 'fb-token',
@@ -14,13 +13,15 @@ const  localStorageDate  = {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private http = inject(HttpClient)
-  private router = inject(Router)
-  constructor() { }
+export class AuthService extends  CommonService{
+  private env = dev
 
-  login(user: UserInterface): Observable<AuthResponseInterface> {
-    const { firebase } =  environment;
+  constructor() {
+    super()
+  }
+
+  public login(user: UserInterface): Observable<AuthResponseInterface> {
+    const { firebase } =  this.env.environment;
     return this.http
       .post<AuthResponseInterface>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebase.apiKey}`, user)
       .pipe(
@@ -28,7 +29,7 @@ export class AuthService {
       )
   }
 
-  setToken(response: AuthResponseInterface | null): void {
+  public  setToken(response: AuthResponseInterface | null): void {
     if  (response && response.expiresIn) {
       let expData: Date =  new Date( new Date().getTime() + +response.expiresIn * 1000)
       localStorage.setItem('fb-token-exp', expData.toString())
@@ -38,7 +39,7 @@ export class AuthService {
     localStorage.clear()
   }
 
-  getToken(): string | null {
+  public get getToken(): string | null {
     let expDate = new Date(localStorage.getItem(localStorageDate.FbTokenExp) as string).getTime(),
         currentDate = new Date().getTime();
     if (currentDate > expDate) {
@@ -48,12 +49,12 @@ export class AuthService {
     return localStorage.getItem(localStorageDate.FbToken)
   }
 
-  logout() {
+  public  logout(): void {
     this.setToken(null)
     this.router.navigate(['/admin', 'login'])
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken()
+  public  isAuthenticated(): boolean {
+    return !!this.getToken
   }
 }
