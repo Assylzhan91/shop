@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     children: [
-      { path: '',redirectTo: '/admin/login',pathMatch: 'full' },
+      { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: 'login',component: LoginPageComponent },
       { path: 'dashboard',
         component: DashboardComponent,

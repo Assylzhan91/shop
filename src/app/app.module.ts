@@ -14,6 +14,7 @@ import {AdminModule} from "./admin/admin.module";
 import {environment} from "../environments/environments";
 import {AUTH_SERVICE, PRODUCT_SERVICE} from "@tokens";
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
+import {ProductComponent} from "./product/product.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
     AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule,
+    ProductComponent,
     BrowserModule,
     AdminModule
   ],

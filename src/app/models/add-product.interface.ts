@@ -7,11 +7,11 @@ export interface AddProductInterface<T> {
 }
 
 export interface AddProductFormInterface {
-  type: string | undefined;
-  title: string | undefined;
-  photo: string | undefined;
-  info: string | undefined;
-  price: string | undefined;
+  type: string;
+  title: string;
+  photo: string;
+  info: string;
+  price: string;
   dataAdd: Date;
 }
 
@@ -20,5 +20,11 @@ export interface ResponseAddProductInterface {
 }
 export interface ResponseProductInterface extends AddProductFormInterface{
   id: string
+  date: Date;
+}
+
+
+export interface GetAllProductsInterface extends AddProductFormInterface {
+  id: string;
   date: Date;
 }

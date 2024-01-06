@@ -40,7 +40,7 @@ export class AddPageComponent implements OnInit{
       return;
     }
     this.isSubmitted = true
-    const product: AddProductFormInterface = {
+    const product: AddProductFormInterface = <AddProductFormInterface>{
       type: this.addProductForm.value.type,
       title: this.addProductForm.value.title,
       photo: this.addProductForm.value.photo,
@@ -49,7 +49,7 @@ export class AddPageComponent implements OnInit{
       dataAdd: new Date()
     }
     this.productService
-      .create(product)
+      .createProduct(product)
       .subscribe({
         next: ()=> {
           this.isSubmitted = false
