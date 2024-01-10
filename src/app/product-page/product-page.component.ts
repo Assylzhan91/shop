@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
+import {PRODUCT_SERVICE} from "@tokens";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {map, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-product-page',
@@ -6,6 +9,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./product-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductPageComponent {
+export class ProductPageComponent implements OnInit{
+  productService = inject(PRODUCT_SERVICE)
+  route = inject(ActivatedRoute)
+  product$ = this.route.params.pipe(switchMap((params: Params | {id: string})=>this.productService.getProductById(params.id)))
 
+  ngOnInit() {
+    this.route.data.subscribe(console.log)
+  }
 }

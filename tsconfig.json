@@ -2,13 +2,27 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@core*": ["core*"],
-      "@tokens": ["./src/app/tokens/tokens.ts"],
-      "@services/*": ["./src/app/services/*"],
-      "@models": ["./src/app/models/index.ts"],
-      "@shared": ["./src/app/shared/index.ts"],
-      "@shared-admin": ["./src/app/admin/shared/index.ts"],
-      "@environments": ["./src/environments/index.ts"],
+      "@core*": [
+        "core*"
+      ],
+      "@environments": [
+        "./src/environments/index.ts"
+      ],
+      "@models": [
+        "./src/app/models/index.ts"
+      ],
+      "@services/*": [
+        "./src/app/services/*"
+      ],
+      "@shared": [
+        "./src/app/shared/index.ts"
+      ],
+      "@shared-admin": [
+        "./src/app/admin/shared/index.ts"
+      ],
+      "@tokens": [
+        "./src/app/tokens/tokens.ts"
+      ]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

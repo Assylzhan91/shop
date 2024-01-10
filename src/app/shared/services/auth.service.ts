@@ -20,7 +20,7 @@ export class AuthService extends  CommonService{
     super()
   }
 
-  login(user: UserInterface): Observable<AuthResponseInterface> {
+  public login(user: UserInterface): Observable<AuthResponseInterface> {
     const { firebase } =  this.env.environment;
     return this.http
       .post<AuthResponseInterface>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebase.apiKey}`, user)
@@ -29,7 +29,7 @@ export class AuthService extends  CommonService{
       )
   }
 
-  setToken(response: AuthResponseInterface | null): void {
+  public  setToken(response: AuthResponseInterface | null): void {
     if  (response && response.expiresIn) {
       let expData: Date =  new Date( new Date().getTime() + +response.expiresIn * 1000)
       localStorage.setItem('fb-token-exp', expData.toString())
@@ -39,7 +39,7 @@ export class AuthService extends  CommonService{
     localStorage.clear()
   }
 
-  getToken(): string | null {
+  public get getToken(): string | null {
     let expDate = new Date(localStorage.getItem(localStorageDate.FbTokenExp) as string).getTime(),
         currentDate = new Date().getTime();
     if (currentDate > expDate) {
@@ -49,12 +49,12 @@ export class AuthService extends  CommonService{
     return localStorage.getItem(localStorageDate.FbToken)
   }
 
-  logout(): void {
+  public  logout(): void {
     this.setToken(null)
     this.router.navigate(['/admin', 'login'])
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken()
+  public  isAuthenticated(): boolean {
+    return !!this.getToken
   }
 }

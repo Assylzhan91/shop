@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      {path: '', redirectTo: '/admin/add', pathMatch: "full"},
+      {path: '', redirectTo: '/', pathMatch: "full"},
       {path: '', component: MainPageComponent},
       {path: 'product/:id', component: ProductPageComponent},
       {path: 'cart', component: CartPageComponent},
