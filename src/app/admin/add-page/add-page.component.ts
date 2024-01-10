@@ -46,7 +46,7 @@ export class AddPageComponent implements OnInit{
       photo: this.addProductForm.value.photo,
       info: this.addProductForm.value.info,
       price: this.addProductForm.value.price,
-      dataAdd: new Date()
+      date: new Date()
     }
     this.productService
       .createProduct(product)
