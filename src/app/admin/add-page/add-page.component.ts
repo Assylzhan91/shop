@@ -28,10 +28,10 @@ export class AddPageComponent implements OnInit{
   ngOnInit(): void {
     this.addProductForm = new UntypedFormGroup({
       type: new UntypedFormControl('Phone', [Validators.required]),
-      title: new UntypedFormControl('asda', [Validators.required]),
+      title: new UntypedFormControl('iPhone 13 Mini 128GB', [Validators.required]),
       photo: new UntypedFormControl('asda', [Validators.required]),
-      info: new UntypedFormControl('asdas', [Validators.required]),
-      price: new UntypedFormControl('asdasd', [Validators.required]),
+      info: new UntypedFormControl('roducts with electrical plugs are designed for use in the US. Outlets and voltage differ internationally and this product may require an adapter or converter for use in your destination. Please check compatibility before purchasing', [Validators.required]),
+      price: new UntypedFormControl('150', [Validators.required]),
     })
   }
 

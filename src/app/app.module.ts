@@ -15,6 +15,7 @@ import {environment} from "../environments/environments";
 import {AUTH_SERVICE, PRODUCT_SERVICE} from "@tokens";
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 import {ProductComponent} from "./product/product.component";
+import {QuillViewHTMLComponent} from "ngx-quill";
 
 @NgModule({
   declarations: [
@@ -24,15 +25,16 @@ import {ProductComponent} from "./product/product.component";
     CartPageComponent,
     AppComponent
   ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ProductComponent,
-    BrowserModule,
-    AdminModule
-  ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ProductComponent,
+        BrowserModule,
+        AdminModule,
+        QuillViewHTMLComponent
+    ],
   providers: [
     {
       provide: AUTH_SERVICE,

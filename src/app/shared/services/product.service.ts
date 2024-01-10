@@ -3,7 +3,7 @@ import {map, Observable} from "rxjs";
 
 import {
   AddProductFormInterface,
-  GetAllProductsInterface,
+  ProductResponseWithId,
   ResponseAddProductInterface,
   ResponseProductInterface
 } from "@models";
@@ -27,13 +27,13 @@ export class ProductService extends CommonService{
             (res: ResponseAddProductInterface) => ({
               ...product,
               id: res.name,
-              date: new Date(product.dataAdd)
+              date: new Date(product.date)
             })
           )
       )
   }
 
-  getAllProducts(): Observable<GetAllProductsInterface[]>{
+  getAllProducts(): Observable<ProductResponseWithId[]>{
       return this.http
         .get<Record<string, AddProductFormInterface>>(`${this.env.environment.firebase.fbDb}/products.json`)
         .pipe(
@@ -41,9 +41,23 @@ export class ProductService extends CommonService{
             return Object.keys(res).map( key => ({
               ...res[key],
               id: key,
-              date: new Date(res[key].dataAdd)
+              date: new Date(res[key].date)
             }))
         }))
   }
+
+  getProductById(id: string): Observable<ProductResponseWithId>{
+      return this.http
+        .get<AddProductFormInterface>(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
+        .pipe(
+          map((res: AddProductFormInterface) => ({
+                ...res,
+              id,
+              date: res.date
+            })
+        ))
+  }
+
+
 
 }

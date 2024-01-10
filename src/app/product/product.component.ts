@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {GetAllProductsInterface} from "@models";
+import {ProductResponseWithId} from "@models";
 import {QuillViewComponent} from "ngx-quill";
 import {RouterLink} from "@angular/router";
 
@@ -13,5 +13,5 @@ import {RouterLink} from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductComponent {
-  @Input({required: true}) product!: GetAllProductsInterface
+  @Input({required: true}) product!: ProductResponseWithId
 }

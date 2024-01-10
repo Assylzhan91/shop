@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {PRODUCT_SERVICE} from "@tokens";
 import {Observable} from "rxjs";
-import {GetAllProductsInterface} from "@models";
+import {ProductResponseWithId} from "@models";
 
 @Component({
   selector: 'app-main-page',
@@ -11,5 +11,5 @@ import {GetAllProductsInterface} from "@models";
 })
 export class MainPageComponent {
   productService = inject(PRODUCT_SERVICE)
-  allProducts$:Observable<GetAllProductsInterface[]> = this.productService.getAllProducts()
+  allProducts$:Observable<ProductResponseWithId[]> = this.productService.getAllProducts()
 }

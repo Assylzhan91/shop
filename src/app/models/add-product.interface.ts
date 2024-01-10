@@ -12,7 +12,7 @@ export interface AddProductFormInterface {
   photo: string;
   info: string;
   price: string;
-  dataAdd: Date;
+  date: Date;
 }
 
 export interface ResponseAddProductInterface {
@@ -23,8 +23,6 @@ export interface ResponseProductInterface extends AddProductFormInterface{
   date: Date;
 }
 
-
-export interface GetAllProductsInterface extends AddProductFormInterface {
+export interface ProductResponseWithId extends AddProductFormInterface {
   id: string;
-  date: Date;
 }
