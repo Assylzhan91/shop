@@ -1,4 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {
+  filter,
+  finalize,
+  interval,
+  Observable, pipe,
+  startWith,
+  Subject,
+  Subscriber,
+  Subscription,
+  switchMap,
+  take, takeUntil
+} from "rxjs";
+
+import {PRODUCT_SERVICE} from "@tokens";
+import {ProductResponseWithId} from "@models";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +21,33 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy{
+  productService = inject(PRODUCT_SERVICE)
+  cdf = inject(ChangeDetectorRef)
+  products: ProductResponseWithId[] = []
+  unsubscribe = new Subject<void>()
 
+  ngOnInit(): void {
+    this.productService.getAllProducts()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((products: ProductResponseWithId[])=> {
+        this.products = products
+        this.cdf.markForCheck()
+      })
+  }
+
+  removeProductById(id: string){
+
+    this.productService.removeProductById(id)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(()=> {
+        this.products = this.products.filter(product =>product.id !== id)
+        this.cdf.markForCheck()
+      })
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next()
+    this.unsubscribe.complete()
+  }
 }
