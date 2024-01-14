@@ -34,30 +34,30 @@ export class ProductService extends CommonService{
   }
 
   getAllProducts(): Observable<ProductResponseWithId[]>{
-      return this.http
-        .get<Record<string, AddProductFormInterface>>(`${this.env.environment.firebase.fbDb}/products.json`)
-        .pipe(
-          map((res: Record<string, AddProductFormInterface>)=> {
-            return Object.keys(res).map( key => ({
-              ...res[key],
-              id: key,
-              date: new Date(res[key].date)
-            }))
+    return this.http
+      .get<Record<string, AddProductFormInterface>>(`${this.env.environment.firebase.fbDb}/products.json`)
+      .pipe(
+        map((res: Record<string, AddProductFormInterface>)=> {
+          return Object.keys(res).map( key => ({
+            ...res[key],
+            id: key,
+            date: new Date(res[key].date)
         }))
+    }))
   }
 
   getProductById(id: string): Observable<ProductResponseWithId>{
-      return this.http
-        .get<AddProductFormInterface>(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
-        .pipe(
-          map((res: AddProductFormInterface) => ({
-                ...res,
-              id,
-              date: res.date
-            })
-        ))
+    return this.http
+      .get<AddProductFormInterface>(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
+      .pipe( map((res: AddProductFormInterface) => ({...res, id, date: res.date})))
   }
 
+  removeProductById(id: string):Observable<Object> {
+    return this.http.delete(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
+  }
 
+  updateProduct(product: ProductResponseWithId): Observable<Object>{
+    return this.http.patch(`${this.env.environment.firebase.fbDb}/products/${product.id}.json`, product)
+  }
 
 }
