@@ -11,6 +11,7 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import {authGuard} from "../shared/guards/auth.guard";
+import {SearchProductPipe} from "./shared/pipes/search-product.pipe";
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     QuillEditorComponent,
+    SearchProductPipe
   ]
 })
 export class AdminModule { }

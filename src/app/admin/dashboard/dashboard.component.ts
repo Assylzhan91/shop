@@ -8,13 +8,14 @@ import {ProductResponseWithId} from "@models";
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit, OnDestroy{
   productService = inject(PRODUCT_SERVICE)
   cdf = inject(ChangeDetectorRef)
   products: ProductResponseWithId[] = []
   unsubscribe = new Subject<void>()
+  searchProductName: string = ''
 
   ngOnInit(): void {
     this.productService.getAllProducts()
