@@ -1,16 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {
-  filter,
-  finalize,
-  interval,
-  Observable, pipe,
-  startWith,
-  Subject,
-  Subscriber,
-  Subscription,
-  switchMap,
-  take, takeUntil
-} from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 
 import {PRODUCT_SERVICE} from "@tokens";
 import {ProductResponseWithId} from "@models";
@@ -36,8 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       })
   }
 
-  removeProductById(id: string){
-
+  removeProductById(id: string): void{
     this.productService.removeProductById(id)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(()=> {
@@ -46,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubscribe.next()
     this.unsubscribe.complete()
   }
