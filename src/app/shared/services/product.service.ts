@@ -56,8 +56,9 @@ export class ProductService extends CommonService{
     return this.http.delete(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
   }
 
-  updateProduct(product: ProductResponseWithId): Observable<Object>{
-    return this.http.patch(`${this.env.environment.firebase.fbDb}/products/${product.id}.json`, product)
+  updateProduct(product: ProductResponseWithId): Observable<ProductResponseWithId>{
+    return this.http
+      .put<ProductResponseWithId>(`${this.env.environment.firebase.fbDb}/products/${product.id}.json`, product)
   }
 
 }
