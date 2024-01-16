@@ -25,6 +25,12 @@ export class MainLayoutComponent {
         }
       })
       this.productService.setTypeProduct(typeProduct)
+      return;
     }
+    this.router.navigate(['/cart'], {
+      queryParams: {
+        type: typeProduct.toLowerCase()
+      }
+    })
   }
 }

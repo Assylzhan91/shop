@@ -1,1 +1,20 @@
-<p>cart-page works!</p>
+<div class="container" *ngIf="cartProducts.length; else emptyCart">
+  <h1 class="">Your order</h1>
+  <table>
+    <tbody>
+      <tr *ngFor="let product of cartProducts; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.title }}</td>
+        <td><button class="btn btn-danger">Delete</button></td>
+        <td>{{ product.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <div>Total: {{ totalPrice }}</div>
+</div>
+<ng-template #emptyCart>
+  <h1 class="text-center">Cart is empty</h1>
+</ng-template>
+

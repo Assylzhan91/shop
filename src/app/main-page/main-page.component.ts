@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 
 import {ProductResponseWithId} from "@models";
 import {PRODUCT_SERVICE} from "@tokens";
@@ -12,5 +12,5 @@ import {PRODUCT_SERVICE} from "@tokens";
 })
 export class MainPageComponent {
   productService = inject(PRODUCT_SERVICE)
-  allProducts$:Observable<ProductResponseWithId[]> = this.productService.getAllProducts().pipe(tap(console.log))
+  allProducts$:Observable<ProductResponseWithId[]> = this.productService.getAllProducts()
 }

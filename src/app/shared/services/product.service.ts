@@ -17,6 +17,7 @@ import {dev} from "@environments";
 export class ProductService extends CommonService{
   private env = dev
   public typeProduct: ProductTypes = 'Laptop'
+  public cartProducts: ProductResponseWithId[] = []
 
   constructor() {
     super()
@@ -46,7 +47,8 @@ export class ProductService extends CommonService{
             id: key,
             date: new Date(res[key].date)
         }))
-    }))
+        })
+      )
   }
 
   getProductById(id: string): Observable<ProductResponseWithId>{
@@ -55,8 +57,8 @@ export class ProductService extends CommonService{
       .pipe( map((res: AddProductFormInterface) => ({...res, id, date: res.date})))
   }
 
-  removeProductById(id: string):Observable<Object> {
-    return this.http.delete(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
+  removeProductById(id: string):Observable<null> {
+    return this.http.delete<null>(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
   }
 
   updateProduct(product: ProductResponseWithId): Observable<ProductResponseWithId>{
@@ -66,6 +68,10 @@ export class ProductService extends CommonService{
 
   setTypeProduct(typeProduct: ProductTypes): void{
     this.typeProduct = typeProduct
+  }
+
+  addCartProduct(product: ProductResponseWithId): void{
+    this.cartProducts.push(product)
   }
 
 }
