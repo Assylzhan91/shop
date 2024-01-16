@@ -5,7 +5,8 @@ import {
   AddProductFormInterface,
   ProductResponseWithId,
   ResponseAddProductInterface,
-  ResponseProductInterface
+  ResponseProductInterface,
+  ProductTypes,
 } from "@models";
 import {CommonService} from "@shared";
 import {dev} from "@environments";
@@ -15,6 +16,8 @@ import {dev} from "@environments";
 })
 export class ProductService extends CommonService{
   private env = dev
+  public typeProduct: ProductTypes = 'Laptop'
+
   constructor() {
     super()
   }
@@ -59,6 +62,10 @@ export class ProductService extends CommonService{
   updateProduct(product: ProductResponseWithId): Observable<ProductResponseWithId>{
     return this.http
       .put<ProductResponseWithId>(`${this.env.environment.firebase.fbDb}/products/${product.id}.json`, product)
+  }
+
+  setTypeProduct(typeProduct: ProductTypes): void{
+    this.typeProduct = typeProduct
   }
 
 }
