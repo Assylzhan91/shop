@@ -1,4 +1,4 @@
-<div *ngIf="allProducts$ | async as products " class="dashboard">
+<div *ngIf="allProducts$ | async as products; else loading" class="dashboard">
   <shop-product
     *ngFor="let product of products | sortingProducts: productService.typeProduct"
     [product]="product"
@@ -6,3 +6,6 @@
   >
   </shop-product>
 </div>
+<ng-template #loading>
+  <h1>Loading..</h1>
+</ng-template>

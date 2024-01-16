@@ -1,8 +1,10 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ProductResponseWithId} from "@models";
 import {QuillViewComponent} from "ngx-quill";
 import {RouterLink} from "@angular/router";
+
+import {ProductResponseWithId} from "@models";
+import {PRODUCT_SERVICE} from "@tokens";
 
 @Component({
   selector: 'shop-product',
@@ -14,4 +16,8 @@ import {RouterLink} from "@angular/router";
 })
 export class ProductComponent {
   @Input({required: true}) product!: ProductResponseWithId
+
+  productService = inject(PRODUCT_SERVICE)
+
+  addProductCart = (product: ProductResponseWithId)=> this.productService.addCartProduct(product)
 }
