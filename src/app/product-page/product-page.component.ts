@@ -14,7 +14,7 @@ export class ProductPageComponent implements OnInit{
   route = inject(ActivatedRoute)
   product$ = this.route.params.pipe(switchMap((params: Params | {id: string})=>this.productService.getProductById(params.id)))
 
-  ngOnInit() {
-    this.route.data.subscribe(console.log)
+  ngOnInit(): void {
+
   }
 }

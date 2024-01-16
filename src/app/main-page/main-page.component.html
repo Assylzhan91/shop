@@ -1,6 +1,6 @@
-<div *ngIf="allProducts$ | async as products" class="dashboard">
+<div *ngIf="allProducts$ | async as products " class="dashboard">
   <shop-product
-    *ngFor="let product of products"
+    *ngFor="let product of products | sortingProducts: productService.typeProduct"
     [product]="product"
     class="box"
   >

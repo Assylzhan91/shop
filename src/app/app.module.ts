@@ -6,14 +6,13 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
-import {MainLayoutComponent, AuthService, ProductService} from '@shared';
+import {MainLayoutComponent, AuthService, ProductService, SortingProductsPipe, AuthInterceptor} from '@shared';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import {AdminModule} from "./admin/admin.module";
 import {environment} from "../environments/environments";
 import {AUTH_SERVICE, PRODUCT_SERVICE} from "@tokens";
-import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 import {ProductComponent} from "./product/product.component";
 import {QuillViewHTMLComponent} from "ngx-quill";
 
@@ -26,14 +25,15 @@ import {QuillViewHTMLComponent} from "ngx-quill";
     AppComponent
   ],
     imports: [
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        AppRoutingModule,
-        HttpClientModule,
-        ProductComponent,
-        BrowserModule,
-        AdminModule,
-        QuillViewHTMLComponent
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireAuthModule,
+      AppRoutingModule,
+      HttpClientModule,
+      ProductComponent,
+      BrowserModule,
+      AdminModule,
+      QuillViewHTMLComponent,
+      SortingProductsPipe,
     ],
   providers: [
     {
