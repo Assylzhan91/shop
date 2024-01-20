@@ -1,20 +1,23 @@
-import { NgModule } from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
-import {HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 import {QuillViewHTMLComponent} from "ngx-quill";
+import { NgModule } from '@angular/core';
+import {BehaviorSubject} from "rxjs";
 
-import { AppComponent } from './app.component';
 import {MainLayoutComponent, AuthService, ProductService, SortingProductsPipe, AuthInterceptor} from '@shared';
-import { MainPageComponent } from './main-page/main-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
-import {AdminModule} from "./admin/admin.module";
-import {environment} from "../environments/environments";
-import {AUTH_SERVICE, PRODUCT_SERVICE} from "@tokens";
+import { MainPageComponent } from './main-page/main-page.component';
 import {ProductComponent} from "./product/product.component";
+import {environment} from "../environments/environments";
+import {AUTH_SERVICE, CART_PRODUCTS, PRODUCT_SERVICE} from "@tokens";
+import {AdminModule} from "./admin/admin.module";
+import { AppComponent } from './app.component';
+import {ProductResponseWithId} from "@models";
 
 @NgModule({
   declarations: [
@@ -24,17 +27,18 @@ import {ProductComponent} from "./product/product.component";
     CartPageComponent,
     AppComponent
   ],
-    imports: [
-      AngularFireModule.initializeApp(environment.firebase),
-      AngularFireAuthModule,
-      AppRoutingModule,
-      HttpClientModule,
-      ProductComponent,
-      BrowserModule,
-      AdminModule,
-      QuillViewHTMLComponent,
-      SortingProductsPipe,
-    ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ProductComponent,
+    BrowserModule,
+    AdminModule,
+    QuillViewHTMLComponent,
+    SortingProductsPipe,
+    ReactiveFormsModule
+  ],
   providers: [
     {
       provide: AUTH_SERVICE,
@@ -45,10 +49,15 @@ import {ProductComponent} from "./product/product.component";
       useClass: ProductService
     },
     {
+      provide: CART_PRODUCTS,
+      useValue: new BehaviorSubject<ProductResponseWithId[]>([])
+    },
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+
   ],
   bootstrap: [AppComponent]
 })

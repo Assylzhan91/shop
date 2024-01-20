@@ -1,12 +1,12 @@
+import {catchError, Observable, throwError} from 'rxjs';
 import {inject, Injectable} from '@angular/core';
+import {Router} from "@angular/router";
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import {catchError, Observable, throwError} from 'rxjs';
-import {Router} from "@angular/router";
 
 import {AUTH_SERVICE} from "@tokens";
 

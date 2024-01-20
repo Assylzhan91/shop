@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {map, Observable} from "rxjs";
 
 import {
@@ -9,15 +9,14 @@ import {
   ProductTypes,
 } from "@models";
 import {CommonService} from "@shared";
-import {dev} from "@environments";
+import {CART_PRODUCTS} from "@tokens";
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService extends CommonService{
-  private env = dev
   public typeProduct: ProductTypes = 'Laptop'
-  public cartProducts: ProductResponseWithId[] = []
+  cartProducts = inject(CART_PRODUCTS)
 
   constructor() {
     super()
@@ -70,8 +69,8 @@ export class ProductService extends CommonService{
     this.typeProduct = typeProduct
   }
 
-  addCartProduct(product: ProductResponseWithId): void{
-    this.cartProducts.push(product)
+  addCartProduct(product: ProductResponseWithId): void {
+    this.cartProducts.next([...this.cartProducts.value, product])
   }
 
 }

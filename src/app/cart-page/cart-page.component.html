@@ -1,18 +1,67 @@
-<div class="container" *ngIf="cartProducts.length; else emptyCart">
+<div class="container" *ngIf="(cartProducts | async)?.length; else emptyCart">
   <h1 class="">Your order</h1>
   <table>
     <tbody>
-      <tr *ngFor="let product of cartProducts; let i = index">
+      <tr *ngFor="let product of (cartProducts | async); let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ product.type }}</td>
         <td>{{ product.title }}</td>
-        <td><button class="btn btn-danger">Delete</button></td>
+        <td><button class="btn btn-danger" (click)="deleteProduct(product, i)">Delete</button></td>
         <td>{{ product.price }}</td>
       </tr>
     </tbody>
   </table>
   <hr>
   <div>Total: {{ totalPrice }}</div>
+  <h1 class="text-center" >Delivery</h1>
+  <form [formGroup]="cartProductForm" (ngSubmit)="paymentProduct()">
+    <h2>Add product</h2>
+    <div class="form-control">
+      <label for="name">Name:
+        <input type="text" id="name" formControlName="name">
+      </label>
+      <div *ngIf="getAddProductForm.name.touched && getAddProductForm.name.invalid" class="validation">
+        <small *ngIf="getAddProductForm.name.errors?.['required']">Enter your name:</small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="phone">Phone:
+        <input type="text" id="phone" formControlName="phone">
+      </label>
+
+      <div *ngIf="getAddProductForm.phone.touched && getAddProductForm.phone.invalid" class="validation">
+        <small *ngIf="getAddProductForm.phone.errors?.['required']">Enter your name:</small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="address">Address:
+        <input type="text" id="address" formControlName="address">
+      </label>
+
+      <div *ngIf="getAddProductForm.address.touched && getAddProductForm.address.invalid" class="validation">
+        <small *ngIf="getAddProductForm.address.errors?.['required']">Enter your address:</small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="payment">Payment method:</label>
+      <select formControlName="payment" id="payment">
+        <option value="Cash">Cash</option>
+        <option value="Cart">Cart</option>
+       </select>
+    </div>
+
+    <button
+      class="btn btn-primary btn-block"
+      [disabled]=" cartProductForm.invalid || isSubmitted"
+      type="submit"
+    >
+      Add product
+    </button>
+  </form>
+
 </div>
 <ng-template #emptyCart>
   <h1 class="text-center">Cart is empty</h1>

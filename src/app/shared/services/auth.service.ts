@@ -3,7 +3,6 @@ import {Observable, tap} from "rxjs";
 
 import {AuthResponseInterface, UserInterface} from "@models";
 import {CommonService} from "@shared";
-import {dev} from "@environments";
 
 const  localStorageDate  = {
   FbTokenExp: 'fb-token',
@@ -14,7 +13,6 @@ const  localStorageDate  = {
   providedIn: 'root'
 })
 export class AuthService extends  CommonService{
-  private env = dev
 
   constructor() {
     super()
