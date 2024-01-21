@@ -8,16 +8,25 @@ import {QuillViewHTMLComponent} from "ngx-quill";
 import { NgModule } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
-import {MainLayoutComponent, AuthService, ProductService, SortingProductsPipe, AuthInterceptor} from '@shared';
+import {AUTH_SERVICE, CART_PRODUCTS, ORDER_SERVICE, PRODUCT_SERVICE} from "@tokens";
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import {ProductComponent} from "./product/product.component";
 import {environment} from "../environments/environments";
-import {AUTH_SERVICE, CART_PRODUCTS, PRODUCT_SERVICE} from "@tokens";
 import {AdminModule} from "./admin/admin.module";
 import { AppComponent } from './app.component';
 import {ProductResponseWithId} from "@models";
+import {
+  MainLayoutComponent,
+  AuthService,
+  ProductService,
+  SortingProductsPipe,
+  AuthInterceptor,
+  OrderService
+} from '@shared';
+
+
 
 @NgModule({
   declarations: [
@@ -57,6 +66,10 @@ import {ProductResponseWithId} from "@models";
       useClass: AuthInterceptor,
       multi: true
     },
+    {
+      provide: ORDER_SERVICE,
+      useClass: OrderService
+    }
 
   ],
   bootstrap: [AppComponent]

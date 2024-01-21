@@ -24,6 +24,7 @@ export class CartPageComponent implements OnInit{
 
   totalPrice: number = this.cartProducts.value.reduce<number>((prev, curr) => prev += +curr.price,  0)
   isSubmitted: boolean = false;
+  isSubmittedOrder: boolean = false;
 
   cartProductForm!: FormGroup<CartProductFormValues<PaymentMethod>>
 
@@ -57,7 +58,9 @@ export class CartPageComponent implements OnInit{
       .subscribe({
         next: ()=> {
           this.isSubmitted = false
+          this.isSubmittedOrder = true
           this.cartProductForm.reset()
+          this.cartProducts.next([])
           this.cdf.detectChanges()
         }
       })

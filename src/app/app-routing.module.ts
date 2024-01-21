@@ -5,8 +5,7 @@ import { QuillModule } from 'ngx-quill'
 import {ProductPageComponent} from "./product-page/product-page.component";
 import {MainPageComponent} from "./main-page/main-page.component";
 import {CartPageComponent} from "./cart-page/cart-page.component";
-import {MainLayoutComponent, OrderService} from "@shared";
-import {ORDER_SERVICE} from "@tokens";
+import {MainLayoutComponent} from "@shared";
 
 
 const routes: Routes = [
@@ -19,13 +18,7 @@ const routes: Routes = [
       {path: 'product/:id', component: ProductPageComponent},
       {
         path: 'cart',
-        component: CartPageComponent,
-        providers: [
-          {
-            provide: ORDER_SERVICE,
-            useClass: OrderService
-          }
-        ]
+        component: CartPageComponent
       },
     ]
   },

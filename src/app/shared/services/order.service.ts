@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
 
 import {CommonService} from "@shared";
-import { OrderPayment, ResponseAddProductInterface } from "@models";
+import {OrderPayment, OrderPaymentWithId, ResponseAddProductInterface} from "@models";
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +27,11 @@ export class OrderService extends CommonService{
       )
   }
 
-/*  getAllProducts(): Observable<ProductResponseWithId[]>{
+  getAllOrderProducts(): Observable<OrderPaymentWithId[]>{
     return this.http
-      .get<Record<string, AddProductFormInterface>>(`${this.env.environment.firebase.fbDb}/products.json`)
+      .get<Record<string,  OrderPayment>>(`${this.env.environment.firebase.fbDb}/orders.json`)
       .pipe(
-        map((res: Record<string, AddProductFormInterface>)=> {
+        map((res: Record<string,  OrderPayment>)=> {
           return Object.keys(res).map( key => ({
             ...res[key],
             id: key,
@@ -41,7 +41,7 @@ export class OrderService extends CommonService{
       )
   }
 
-  removeProductById(id: string):Observable<null> {
-    return this.http.delete<null>(`${this.env.environment.firebase.fbDb}/products/${id}.json`)
-  }*/
+  removeOrderById(id: string):Observable<null> {
+    return this.http.delete<null>(`${this.env.environment.firebase.fbDb}/orders/${id}.json`)
+  }
 }

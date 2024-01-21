@@ -1,20 +1,21 @@
-<div class="container" *ngIf="(cartProducts | async)?.length; else emptyCart">
-  <h1 class="">Your order</h1>
-  <table>
-    <tbody>
-      <tr *ngFor="let product of (cartProducts | async); let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ product.type }}</td>
-        <td>{{ product.title }}</td>
-        <td><button class="btn btn-danger" (click)="deleteProduct(product, i)">Delete</button></td>
-        <td>{{ product.price }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <hr>
-  <div>Total: {{ totalPrice }}</div>
-  <h1 class="text-center" >Delivery</h1>
-  <form [formGroup]="cartProductForm" (ngSubmit)="paymentProduct()">
+<div class="container" *ngIf="(cartProducts | async)?.length || isSubmittedOrder; else emptyCart">
+  <ng-container *ngIf="!isSubmittedOrder; else orderIsSubmitted">
+    <h1 class="">Your order</h1>
+    <table>
+      <tbody>
+        <tr *ngFor="let product of (cartProducts | async); let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ product.type }}</td>
+          <td>{{ product.title }}</td>
+          <td><button class="btn btn-danger" (click)="deleteProduct(product, i)">Delete</button></td>
+          <td>{{ product.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <div>Total: {{ totalPrice }}</div>
+    <h1 class="text-center" >Delivery</h1>
+    <form [formGroup]="cartProductForm" (ngSubmit)="paymentProduct()">
     <h2>Add product</h2>
     <div class="form-control">
       <label for="name">Name:
@@ -61,9 +62,13 @@
       Add product
     </button>
   </form>
-
+  </ng-container>
 </div>
+
+<ng-template #orderIsSubmitted>
+  <h1 class="text-center">Order is submitted</h1>
+</ng-template>
+
 <ng-template #emptyCart>
   <h1 class="text-center">Cart is empty</h1>
 </ng-template>
-
