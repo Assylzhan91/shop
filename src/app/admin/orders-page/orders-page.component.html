@@ -1,1 +1,39 @@
-<p>orders-page works!</p>
+<ng-container *ngIf="orders.length; else loading">
+  <h2 class="text-center">Table of Orders</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Phone</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Products</th>
+      <th>Price</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders; let idx = index">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ order.date | date: 'medium'}}</td>
+      <td>{{ order.phone }}</td>
+      <td>{{ order.name }}</td>
+      <td>{{ order.address}}</td>
+      <td>
+        <h6  *ngFor="let product of order.orders">{{ product.title }}</h6>
+      </td>
+      <td>
+        <div class="text-center">{{ order.price}}</div>
+        <div class="text-center">{{ order.payment}}</div>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="removeProductById(order.id)">Completed</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

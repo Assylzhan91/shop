@@ -35,18 +35,22 @@ export enum PaymentMethod {
   Cart = 'Cart'
 }
 export interface Order<T> {
-  name: string;
-  phone: string;
   address: string;
-  payment: T;
-  price: string;
-  orders: ProductResponseWithId[];
   date: Date;
+  name: string;
+  orders: ProductResponseWithId[];
+  payment: T;
+  phone: string;
+  price: string;
 }
 
 export type OrderPayment = Order<PaymentMethod>
 
+export type ResponseAllListInterface = {
+  id: string; date: Date
+}
 
+export type OrderPaymentWithId = OrderPayment & ResponseAllListInterface
 
 export interface CartProductFormValues<T> {
   name: FormControl<string | undefined>;
